@@ -13,9 +13,17 @@ typedef struct s_game_data
 	int		required_score;
 	int		current_score;
 	int		steps;
+	int		exit_count;
+	int		game_over;
 	char	**map;
 
 }	t_game_data;
+
+typedef struct s_point
+{
+	int		x;
+	int		y;
+}	t_point;
 
 void	free_ptr(char *ptr);
 void	free_ptr_ptr(char **ptr);
@@ -35,5 +43,8 @@ int		is_rectangular(char **map, int height, int width);
 int		is_wall_surrounded(char **map, int height, int width);
 int		is_full(char **map, int height, int width, int cnt[3]);
 int		check_valid_map(char **map, int height, int width);
+
+void	fill(char **map, t_point size, t_point cur, char to_fill);
+void	flood_fill(char **map, t_point size, t_point begin);
 
 #endif
