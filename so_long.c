@@ -3,9 +3,7 @@
 int	main(int argc, char **argv)
 {
 	t_game_data	*data;
-	int	success_flg = 0;
 	int i;
-	
 
 	data = (t_game_data *)malloc(sizeof(t_game_data));
 	if (!data)
@@ -15,25 +13,10 @@ int	main(int argc, char **argv)
 	data->height = 0;
 	data->width = 0;
 	data->map = NULL;
-
-	// ft_printf("%d\n", data->required_score);
-
-	success_flg = read_map(argc, argv, &data);
-	if (success_flg == 0)
-		// map_error(&data);
-	{
-		ft_printf("ERROR");
-		free_map(data);
-		return (0);
-	}
-	success_flg = check_valid_map(data->map, data->height, data->width);
-	if (success_flg == 0)
-		// map_error(&data);
-	{
-		ft_printf("ERROR");
-		free_map(data);
-		return (0);
-	}
+	if (read_map(argc, argv, &data) == 0)
+		return (map_error(&data));
+	if (check_valid_map(data->map, data->height, data->width) == 0)
+		return (map_error(&data));
 
 	// ---just for me, delete later:
 	i = 0;
@@ -42,10 +25,8 @@ int	main(int argc, char **argv)
 		ft_printf("%s\n", data->map[i]);
 		i++;
 	}
-	ft_printf("%d %d", (data)->height, (data)->width);
-	// ft_printf("\n%d\n", data->required_score);
+	ft_printf("height: %d width: %d items: %d", (data)->height, (data)->width, data->required_score);
 	// ---just for me, delete later.
-
 	free_map(data);
 	return (0);
 }

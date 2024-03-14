@@ -17,10 +17,9 @@ int	map_line_len(char **map, int height)
 	return (prev_len);
 }
 
-// does not work (maybe because I should use return in main, not here (or also in main), for example: return (map_error(...)))
 int	map_error(t_game_data **data)
 {
-	ft_printf("ERROR");
+	ft_printf("Error\n");
 	free_map(*data);
 	return (0);
 }

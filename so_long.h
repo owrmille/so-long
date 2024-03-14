@@ -31,6 +31,8 @@ int		store_map(char *file_name, char **line, t_game_data **data);
 int		read_map(int argc, char **argv, t_game_data **data);
 
 int		is_rectangular(char **map, int height, int width);
+int		is_wall_surrounded(char **map, int height, int width);
+int		is_full(char **map, int height, int width, int cnt[3]);
 int		check_valid_map(char **map, int height, int width);
 
 #endif

@@ -13,12 +13,9 @@ void	calculate_size(int fd, char **line, t_game_data **data)
 	// - 1 because of '\n' in every line
 	while (*line)
 	{
-		// (*data)->required_score += find_symbol(*line, 'C');
 		free_ptr_ptr(line);
 		*line = get_next_line(fd);
 		i++;
-		// exits += find_symbol(*line, 'E');
-		// players += find_symbol(*line, 'P');
 	}
 	free_ptr_ptr(line);
 	(*data)->height = i;
@@ -37,7 +34,7 @@ int	store_map(char *file_name, char **line, t_game_data **data)
 	while (*line)
 	{
 		(*data)->map[i] = strdup(*line);
-
+		(*data)->required_score += find_symbol(*line, 'C');
 		if ((*data)->map[i][ft_strlen(*line) - 1] == '\n')
 		{
 			(*data)->map[i][ft_strlen(*line) - 1] = '\0';
@@ -45,8 +42,6 @@ int	store_map(char *file_name, char **line, t_game_data **data)
 		free_ptr_ptr(line);
 		*line = get_next_line(fd);
 		i++;
-		// exits += find_symbol(*line, 'E');
-		// players += find_symbol(*line, 'P');
 	}
 	free_ptr_ptr(line);
 	(*data)->map[i] = NULL;
@@ -62,13 +57,13 @@ int	read_map(int argc, char **argv, t_game_data **data)
 		|| !ft_strrchr(argv[1], '.') 
 		|| ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 4))
 	{
-		ft_printf("Filename error\n");
+		// ft_printf("Filename error\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Opening file error\n");
+		// ft_printf("Opening file error\n");
 		return (0);
 	}
 	calculate_size(fd, &line, data);
@@ -76,10 +71,6 @@ int	read_map(int argc, char **argv, t_game_data **data)
 		return (0);
 	(*data)->map = (char **)malloc(sizeof(char *) * ((*data)->height + 1));
 	store_map(argv[1], &line, data);
-	// check_valid_map();
-	// ft_printf("LEN %d", ft_strlen((*data)->map[0]));
-
 	close(fd);
-
 	return (1);
 }
