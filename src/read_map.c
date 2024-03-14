@@ -72,6 +72,8 @@ int	read_map(int argc, char **argv, t_game_data **data)
 		return (0);
 	}
 	calculate_size(fd, &line, data);
+	if ((*data)->height == 0)
+		return (0);
 	(*data)->map = (char **)malloc(sizeof(char *) * ((*data)->height + 1));
 	store_map(argv[1], &line, data);
 	// check_valid_map();
