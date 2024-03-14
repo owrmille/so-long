@@ -2,7 +2,7 @@
 NAME	=	so_long
 
 CC		=	cc
-CFLAGS	=	 -Imlx -g 
+CFLAGS	=	-Wall -Wextra -Werror -Imlx -g 
 
 MLXFLAGS=	-L ./minilibx-linux -lmlx -lXext -lX11
 
@@ -10,8 +10,9 @@ LIBS	=	./libft/libft/libft.a
 
 SRCS	=	so_long.c \
 			./src/read_map.c \
-			./src/utils.c
-
+			./src/check_valid_map.c \
+			./src/utils.c \
+			./src/utils_2.c
 
 OBJS	=	$(SRCS:.c=.o)
 

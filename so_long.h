@@ -19,10 +19,18 @@ typedef struct s_game_data
 
 void	free_ptr(char *ptr);
 void	free_ptr_ptr(char **ptr);
+void	free_map(t_game_data *data);
 int		find_symbol(char *s, char c);
+int		ft_arrlen(char **arr);
+
+int		map_line_len(char **map, int height);
+int		map_error(t_game_data **data);
 
 void	calculate_size(int fd, char **line, t_game_data **data);
-void	store_map(char *file_name, char **line, t_game_data **data);
+int		store_map(char *file_name, char **line, t_game_data **data);
 int		read_map(int argc, char **argv, t_game_data **data);
+
+int		is_rectangular(char **map, int height, int width);
+int		check_valid_map(char **map, int height, int width);
 
 #endif

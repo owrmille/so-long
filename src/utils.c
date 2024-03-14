@@ -18,6 +18,18 @@ int	find_symbol(char *s, char c)
 	return (count);
 }
 
+int	ft_arrlen(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
 void	free_ptr(char *ptr)
 {
 	if (ptr)
@@ -33,5 +45,33 @@ void	free_ptr_ptr(char **ptr)
 	{
 		free(*ptr);
 		*ptr = NULL;
+	}
+}
+
+
+void	free_map(t_game_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < (data)->height)
+	{
+		if ((data)->map[i])
+		{
+			free((data)->map[i]);
+		// free((data)->map[i]);
+			(data)->map[i] = NULL;
+		}
+		i++;
+	}
+	if (data->map)
+	{
+		free(data->map);
+		data->map = NULL;
+	}
+	if (data)
+	{
+		free(data);
+		data = NULL;
 	}
 }

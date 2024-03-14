@@ -24,7 +24,7 @@ void	calculate_size(int fd, char **line, t_game_data **data)
 	(*data)->height = i;
 }
 
-void	store_map(char *file_name, char **line, t_game_data **data)
+int	store_map(char *file_name, char **line, t_game_data **data)
 {
 	int	i;
 	int	fd;
@@ -38,9 +38,9 @@ void	store_map(char *file_name, char **line, t_game_data **data)
 	{
 		(*data)->map[i] = strdup(*line);
 
-		if ((*data)->map[i][(*data)->width] == '\n')
+		if ((*data)->map[i][ft_strlen(*line) - 1] == '\n')
 		{
-			(*data)->map[i][(*data)->width] = '\0';
+			(*data)->map[i][ft_strlen(*line) - 1] = '\0';
 		}
 		free_ptr_ptr(line);
 		*line = get_next_line(fd);
@@ -50,20 +50,27 @@ void	store_map(char *file_name, char **line, t_game_data **data)
 	}
 	free_ptr_ptr(line);
 	(*data)->map[i] = NULL;
+	return (1);
 }
 
 int	read_map(int argc, char **argv, t_game_data **data)
 {
 	int		fd;
 	char	*line;
-	char	*map;
 
-	if (argc != 2)
+	if (argc != 2 
+		|| !ft_strrchr(argv[1], '.') 
+		|| ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 4))
+	{
+		ft_printf("Filename error\n");
 		return (0);
+	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
+	{
+		ft_printf("Opening file error\n");
 		return (0);
-
+	}
 	calculate_size(fd, &line, data);
 	(*data)->map = (char **)malloc(sizeof(char *) * ((*data)->height + 1));
 	store_map(argv[1], &line, data);
@@ -72,5 +79,5 @@ int	read_map(int argc, char **argv, t_game_data **data)
 
 	close(fd);
 
-	return (0);
+	return (1);
 }
