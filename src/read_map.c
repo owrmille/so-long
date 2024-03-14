@@ -21,6 +21,22 @@ void	calculate_size(int fd, char **line, t_game_data **data)
 	(*data)->height = i;
 }
 
+void	store_player_coordinates(int i, char *line, t_game_data **data)
+{
+	int	j;
+
+	j = 0;
+	while (j < ft_strlen(line))
+	{
+		if (line[j] == 'P')
+		{
+			(*data)->player_pos_x = j + 1;
+			(*data)->player_pos_y = i + 1;
+		}
+		j++;
+	}
+}
+
 int	store_map(char *file_name, char **line, t_game_data **data)
 {
 	int	i;
@@ -35,6 +51,8 @@ int	store_map(char *file_name, char **line, t_game_data **data)
 	{
 		(*data)->map[i] = strdup(*line);
 		(*data)->required_score += find_symbol(*line, 'C');
+		if (find_symbol(*line, 'P'))
+			store_player_coordinates(i, *line, data);
 		if ((*data)->map[i][ft_strlen(*line) - 1] == '\n')
 		{
 			(*data)->map[i][ft_strlen(*line) - 1] = '\0';

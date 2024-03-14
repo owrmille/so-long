@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		ft_printf("%s\n", data->map[i]);
 		i++;
 	}
-	ft_printf("height: %d width: %d items: %d", (data)->height, (data)->width, data->required_score);
+	ft_printf("height: %d width: %d items: %d player_x: %d player_y: %d", (data)->height, (data)->width, data->required_score, data->player_pos_x, data->player_pos_y);
 	// ---just for me, delete later.
 	free_map(data);
 	return (0);

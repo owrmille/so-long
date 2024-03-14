@@ -27,6 +27,7 @@ int		map_line_len(char **map, int height);
 int		map_error(t_game_data **data);
 
 void	calculate_size(int fd, char **line, t_game_data **data);
+void	store_player_coordinates(int i, char *line, t_game_data **data);
 int		store_map(char *file_name, char **line, t_game_data **data);
 int		read_map(int argc, char **argv, t_game_data **data);
 
