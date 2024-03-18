@@ -46,6 +46,11 @@ int		check_valid_map(char **map, int height, int width);
 
 int		find_directions(t_game_data *data_copy, int cur_x, int cur_y);
 int		find_path(t_game_data *data_copy, int cur_x, int cur_y);
+void	copy_plain_data(t_game_data *data, t_game_data **data_copy);
+int		copy_structure(t_game_data *data, t_game_data **data_copy);
 int		check_valid_path(t_game_data *data);
+
+void	print_map(t_game_data *data);
+void	print_difference(t_game_data *data, t_game_data *data_copy);
 
 #endif

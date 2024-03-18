@@ -13,7 +13,8 @@ SRCS	=	so_long.c \
 			./src/check_valid_map.c \
 			./src/check_valid_path.c \
 			./src/utils.c \
-			./src/utils_2.c
+			./src/utils_2.c \
+			temp.c
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -3,15 +3,17 @@
 int	main(int argc, char **argv)
 {
 	t_game_data	*data;
-	int i;
 
 	data = (t_game_data *)malloc(sizeof(t_game_data));
 	if (!data)
 		return (0);
-	data->required_score = 0;
-	data->current_score = 0;
 	data->height = 0;
 	data->width = 0;
+	data->required_score = 0;
+	data->current_score = 0;
+	data->steps = 0;
+	data->exit_count = 0;
+	data->game_over = 0;
 	data->map = NULL;
 	if (read_map(argc, argv, &data) == 0)
 		return (map_error(&data));
@@ -19,19 +21,11 @@ int	main(int argc, char **argv)
 		return (map_error(&data));
 	if (check_valid_path(data) == 0)
 	{
-		ft_printf("No valid path???");
-		// return (map_error(&data));
+		return (map_error(&data));
 	}
-	else
-		ft_printf("\nFOUND VALID PATH\n");
 	// ---just for me, delete later:
-	i = 0;
-	while (i < data->height)
-	{
-		ft_printf("%s\n", data->map[i]);
-		i++;
-	}
-	ft_printf("height: %d width: %d items: %d player_x: %d player_y: %d", (data)->height, (data)->width, data->required_score, data->player_pos_x, data->player_pos_y);
+	print_map(data);
+	ft_printf("height: %d width: %d items: %d player_x: %d player_y: %d\n", (data)->height, (data)->width, data->required_score, data->player_pos_x, data->player_pos_y);
 	// ---just for me, delete later.
 	free_map(data);
 	return (0);
