@@ -28,9 +28,6 @@ int	find_path(t_game_data *data_copy, int cur_x, int cur_y)
 	if ((data_copy)->player_pos_y < 0 || (data_copy)->player_pos_y >= (data_copy)->height 
 		|| (data_copy)->player_pos_x < 0 || (data_copy)->player_pos_x >= (data_copy)->width
 		|| (data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] == '1')
-		// || ((data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] != '0' 
-		// && (data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] != 'C'
-		// && (data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] != 'P'))
 	{
 		// ft_printf("\nSymbol: %c\n", (data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x]);
 		// ft_printf("2");
@@ -79,6 +76,8 @@ int	copy_structure(t_game_data *data, t_game_data **data_copy)
 	while (i < data->height)
 	{
 		(*data_copy)->map[i] = ft_strdup(data->map[i]);
+		if ((*data_copy)->map[i] == NULL)
+			return (0);
 		i++;
 	}
 	copy_plain_data(data, data_copy);

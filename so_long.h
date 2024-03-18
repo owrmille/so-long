@@ -16,14 +16,7 @@ typedef struct s_game_data
 	int		exit_count;
 	int		game_over;
 	char	**map;
-
 }	t_game_data;
-
-typedef struct s_point
-{
-	int		x;
-	int		y;
-}	t_point;
 
 void	free_ptr(char *ptr);
 void	free_ptr_ptr(char **ptr);

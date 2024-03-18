@@ -10,7 +10,7 @@ void	calculate_size(int fd, char **line, t_game_data **data)
 	{
 		(*data)->width = ft_strlen(*line) - 1;
 	}
-	// - 1 because of '\n' in every line
+	/* -1 because of '\n' in every line */
 	while (*line)
 	{
 		free_ptr_ptr(line);
