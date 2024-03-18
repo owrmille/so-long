@@ -11,7 +11,7 @@ LIBS	=	./libft/libft/libft.a
 SRCS	=	so_long.c \
 			./src/read_map.c \
 			./src/check_valid_map.c \
-			./src/find_path.c \
+			./src/check_valid_path.c \
 			./src/utils.c \
 			./src/utils_2.c
 

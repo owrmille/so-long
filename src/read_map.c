@@ -30,8 +30,8 @@ void	store_player_coordinates(int i, char *line, t_game_data **data)
 	{
 		if (line[j] == 'P')
 		{
-			(*data)->player_pos_x = j + 1;
-			(*data)->player_pos_y = i + 1;
+			(*data)->player_pos_x = j;
+			(*data)->player_pos_y = i;
 		}
 		j++;
 	}

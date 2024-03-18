@@ -17,7 +17,13 @@ int	main(int argc, char **argv)
 		return (map_error(&data));
 	if (check_valid_map(data->map, data->height, data->width) == 0)
 		return (map_error(&data));
-
+	if (check_valid_path(data) == 0)
+	{
+		ft_printf("No valid path???");
+		// return (map_error(&data));
+	}
+	else
+		ft_printf("\nFOUND VALID PATH\n");
 	// ---just for me, delete later:
 	i = 0;
 	while (i < data->height)
