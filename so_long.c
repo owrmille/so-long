@@ -15,6 +15,7 @@ int	main(int argc, char **argv)
 	data->exit_count = 0;
 	data->game_over = 0;
 	data->map = NULL;
+	// data->exit = NULL;
 	if (read_map(argc, argv, &data) == 0)
 		return (map_error(&data));
 	if (check_valid_map(data->map, data->height, data->width) == 0)
@@ -23,6 +24,7 @@ int	main(int argc, char **argv)
 	{
 		return (map_error(&data));
 	}
+	start_game(data);
 	// ---just for me, delete later:
 	print_map(data);
 	ft_printf("height: %d width: %d items: %d player_x: %d player_y: %d\n", (data)->height, (data)->width, data->required_score, data->player_pos_x, data->player_pos_y);

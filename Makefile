@@ -12,6 +12,8 @@ SRCS	=	so_long.c \
 			./src/read_map.c \
 			./src/check_valid_map.c \
 			./src/check_valid_path.c \
+			./src/start_game.c \
+			./src/build_utils.c \
 			./src/utils.c \
 			./src/utils_2.c \
 			temp.c

@@ -69,6 +69,13 @@ void	free_map(t_game_data *data)
 		free(data->map);
 		data->map = NULL;
 	}
+	//
+	if (data->player)
+	{
+		free(data->player);
+		data->player = NULL;
+	}
+	//
 	if (data)
 	{
 		free(data);
