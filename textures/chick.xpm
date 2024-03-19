@@ -1,0 +1,28 @@
+/* XPM */
+static char *chick1710852430[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 6 1 ",
+"  c None",
+". c #120207",
+"X c #EF9320",
+"o c #FFBE59",
+"O c #FFE86C",
+"+ c #FFF0B7",
+/* pixels */
+"                ",
+"                ",
+"                ",
+"                ",
+"                ",
+"                ",
+"                ",
+"                ",
+"      ....      ",
+"     .o++o.     ",
+"     .OO.O.     ",
+"    .OOOOXX.    ",
+"     .oOOo.     ",
+"      ....      ",
+"                ",
+"                "
+};
