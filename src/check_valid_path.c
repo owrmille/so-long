@@ -59,6 +59,12 @@ void	copy_plain_data(t_game_data *data, t_game_data **data_copy)
 	(*data_copy)->steps = data->steps;
 	(*data_copy)->exit_count = data->exit_count;
 	(*data_copy)->game_over = data->game_over;
+
+	(*data_copy)->background = data->background;
+	(*data_copy)->wall = data->wall;
+	(*data_copy)->collectable = data->collectable;
+	(*data_copy)->exit = data->exit;
+	(*data_copy)->player = data->player;
 }
 
 int	copy_structure(t_game_data *data, t_game_data **data_copy)

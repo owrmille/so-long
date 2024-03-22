@@ -15,7 +15,14 @@ int	main(int argc, char **argv)
 	data->exit_count = 0;
 	data->game_over = 0;
 	data->map = NULL;
-	// data->exit = NULL;
+	data->background = NULL;
+	data->wall = NULL;
+	data->collectable = NULL;
+	data->exit = NULL;
+	data->player = NULL;
+	// data->mlx = NULL;
+	// data->win = NULL;
+
 	if (read_map(argc, argv, &data) == 0)
 		return (map_error(&data));
 	if (check_valid_map(data->map, data->height, data->width) == 0)
@@ -24,6 +31,7 @@ int	main(int argc, char **argv)
 	{
 		return (map_error(&data));
 	}
+	print_map(data);
 	start_game(data);
 	// ---just for me, delete later:
 	print_map(data);
