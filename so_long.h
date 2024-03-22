@@ -30,18 +30,19 @@ typedef struct s_game_data
 	char	**map;
 	// void	*mlx;
 	// void	*win;
-	void	*end_img;
-	void	*wall;
-	void	*exit;
-	void	*player;
-	void	*collectable;
-	void	*background;
+	// void	*end_img;
+	// void	*wall;
+	// void	*exit;
+	// void	*player;
+	// void	*collectable;
+	// void	*background;
 }	t_game_data;
 
 typedef struct s_render_v
 {
 	void	*mlx;
 	void	*win;
+	void	*textures[5];
 }	t_render_v;
 
 void	free_ptr(char *ptr);
@@ -69,13 +70,13 @@ void	copy_plain_data(t_game_data *data, t_game_data **data_copy);
 int		copy_structure(t_game_data *data, t_game_data **data_copy);
 int		check_valid_path(t_game_data *data);
 
-void	build_player(t_game_data **data, t_render_v **var);
-void	build_collectable(t_game_data **data, t_render_v **var);
-void	build_wall(t_game_data **data, t_render_v **var);
-void	build_exit(t_game_data **data, t_render_v **var);
+void	build_player(t_render_v **var);
+void	build_collectable(t_render_v **var);
+void	build_wall(t_render_v **var);
+void	build_exit(t_render_v **var);
 
-void	build_images(t_game_data **data, t_render_v **var);
-int		start_game(t_game_data *data);
+void	build_images(t_render_v **var);
+int		start_game(t_game_data **data);
 
 void	print_map(t_game_data *data);
 void	print_difference(t_game_data *data, t_game_data *data_copy);

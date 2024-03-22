@@ -37,3 +37,46 @@ int start_game(t_game_data *data)
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }
+
+	i = 0;
+	// while (i < 4)
+	// {
+	// 	if ((*var)->textures[i])
+	// 	{
+	// 		free((*var)->textures[i]);
+	// 		(*var)->textures[i] = NULL;
+	// 	}
+	// 	i++;
+	// }
+	
+	
+
+
+	i = 0;
+	// while (i < (*data)->height && (*data)->map[i])
+	// {
+	// 	if ((*data)->map[i])
+	// 	{
+	// 		free((*data)->map[i]);
+	// 		(*data)->map[i] = NULL;
+	// 	}
+	// 	i++;
+	// }
+	// if ((*data)->map)
+	// {
+	// 	free((*data)->map);
+	// 	(*data)->map = NULL;
+	// }
+	// if (*data)
+	// {
+	// 	free(*data);
+	// 	*data = NULL;
+	// }
+	// if (data)
+	// {
+	// 	free(data);
+	// 	data = NULL;
+	// }
+	exit(0);
+	return (0);
+}

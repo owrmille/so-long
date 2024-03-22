@@ -1,6 +1,6 @@
 #include "../so_long.h"
 
-void	build_player(t_game_data **data, t_render_v **var)
+void	build_player(t_render_v **var)
 {
 	static void	*img;
 	char		*file;
@@ -11,10 +11,11 @@ void	build_player(t_game_data **data, t_render_v **var)
 	{
 		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
 	}
-	(*data)->player = img;
+	// (*data)->player = img;
+	(*var)->textures[0] = img;
 }
 
-void	build_collectable(t_game_data **data, t_render_v **var)
+void	build_collectable(t_render_v **var)
 {
 	static void	*img;
 	char		*file;
@@ -25,10 +26,11 @@ void	build_collectable(t_game_data **data, t_render_v **var)
 	{
 		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
 	}
-	(*data)->collectable = img;
+	// (*data)->collectable = img;
+	(*var)->textures[1] = img;
 }
 
-void	build_wall(t_game_data **data, t_render_v **var)
+void	build_wall(t_render_v **var)
 {
 	static void	*img;
 	char		*file;
@@ -39,10 +41,11 @@ void	build_wall(t_game_data **data, t_render_v **var)
 	{
 		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
 	}
-	(*data)->wall = img;
+	// (*data)->wall = img;
+	(*var)->textures[2] = img;
 }
 
-void	build_exit(t_game_data **data, t_render_v **var)
+void	build_exit(t_render_v **var)
 {
 	static void	*img;
 	char		*file;
@@ -53,5 +56,6 @@ void	build_exit(t_game_data **data, t_render_v **var)
 	{
 		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
 	}
-	(*data)->exit = img;
+	// (*data)->exit = img;
+	(*var)->textures[3] = img;
 }

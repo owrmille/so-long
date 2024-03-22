@@ -15,11 +15,11 @@ int	main(int argc, char **argv)
 	data->exit_count = 0;
 	data->game_over = 0;
 	data->map = NULL;
-	data->background = NULL;
-	data->wall = NULL;
-	data->collectable = NULL;
-	data->exit = NULL;
-	data->player = NULL;
+	// data->background = NULL;
+	// data->wall = NULL;
+	// data->collectable = NULL;
+	// data->exit = NULL;
+	// data->player = NULL;
 	// data->mlx = NULL;
 	// data->win = NULL;
 
@@ -32,11 +32,12 @@ int	main(int argc, char **argv)
 		return (map_error(&data));
 	}
 	print_map(data);
-	start_game(data);
+	start_game(&data);
 	// ---just for me, delete later:
 	print_map(data);
 	ft_printf("height: %d width: %d items: %d player_x: %d player_y: %d\n", (data)->height, (data)->width, data->required_score, data->player_pos_x, data->player_pos_y);
 	// ---just for me, delete later.
-	free_map(data);
+
+	// free_map(data);
 	return (0);
 }
