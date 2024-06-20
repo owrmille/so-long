@@ -59,3 +59,18 @@ void	build_exit(t_render_v **var)
 	// (*data)->exit = img;
 	(*var)->textures[3] = img;
 }
+
+void	build_ground(t_render_v **var)
+{
+	static void	*img;
+	char		*file;
+	int			size[2];
+
+	file = GRASS;
+	if (!img)
+	{
+		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
+	}
+	// (*data)->player = img;
+	(*var)->textures[4] = img;
+}

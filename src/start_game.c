@@ -1,4 +1,5 @@
 #include "../so_long.h"
+
 void free_data(t_game_data *data) {
 	if (data) {
 		// Free the map
@@ -21,8 +22,10 @@ void free_data(t_game_data *data) {
 		free(data);
 	}
 }
+
 void	build_images(t_render_v **var)
 {
+	build_ground(var);
 	build_wall(var);
 	build_collectable(var);
 	build_exit(var);
@@ -38,6 +41,7 @@ int	end_game(t_render_v **var, t_game_data **data)
 	mlx_destroy_image((*var)->mlx, (*var)->textures[1]);
 	mlx_destroy_image((*var)->mlx, (*var)->textures[2]);
 	mlx_destroy_image((*var)->mlx, (*var)->textures[3]);
+	mlx_destroy_image((*var)->mlx, (*var)->textures[4]);
 
 	mlx_destroy_window((*var)->mlx, (*var)->win);
 	mlx_destroy_display((*var)->mlx);
@@ -54,17 +58,24 @@ int	end_game(t_render_v **var, t_game_data **data)
 		*var = NULL;
 	}
 	free_data(*data);
+	// free((*var)->mlx); // DANTOL DID THIS
 	exit(0);
 	return (0);
 }
 
-int	key_hook(int keycode, t_render_v **var, t_game_data **data)
+void	key_hook(int keycode, t_render_v **var, t_game_data **data)
 {
+	if (data == NULL || *data == NULL) {
+        ft_printf("key_hook, Error: game pointer is NULL\n");
+        return;
+    }
 	ft_printf("Pressed key: %d\\n", keycode);
+	if (keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
+		move_player(data, var, keycode);
 	if (keycode == 53 || keycode == 27 || keycode == 9 || keycode == 65307)
 		end_game(var, data);
 	// move_player(keycode, game);
-	return (0);
+	// return (0);
 }
 
 void	*get_figure(t_render_v *var, char img_type)
@@ -79,6 +90,8 @@ void	*get_figure(t_render_v *var, char img_type)
 		figure = var->textures[2];
 	else if (img_type == 'E')
 		figure = var->textures[3];
+	else if (img_type == '0')
+		figure = var->textures[4];
 	else
 		figure = NULL;
 	return (figure);

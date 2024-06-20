@@ -13,6 +13,7 @@ SRCS	=	so_long.c \
 			./src/check_valid_map.c \
 			./src/check_valid_path.c \
 			./src/start_game.c \
+			./src/move_player.c \
 			./src/build_utils.c \
 			./src/utils.c \
 			./src/utils_2.c \
@@ -25,7 +26,7 @@ all:		$(NAME)
 $(NAME): $(OBJS)
 			make -C  ./minilibx-linux
 			make -C  ./libft/libft
-			$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
+			$(CC) -g $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
 
 clean:
 			make clean -C ./minilibx-linux

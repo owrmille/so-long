@@ -99,8 +99,8 @@ int	check_valid_path(t_game_data *data)
 	if (find_path(data_copy, data_copy->player_pos_x, data_copy->player_pos_y))
 	{
 		// just for me:
-		print_map(data_copy);
-		print_difference(data, data_copy);
+		// print_map(data_copy);
+		// print_difference(data, data_copy);
 		// just for me.
 		free_map(data_copy);
 		return (1);

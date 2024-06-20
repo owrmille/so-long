@@ -6,6 +6,7 @@
 
 # define TILE_WIDTH 64
 
+# define GRASS "./textures/grass.xpm"
 # define CHICKEN "./textures/chicken.xpm"
 # define CHICK "./textures/chick.xpm"
 # define ROCK "./textures/rock.xpm"
@@ -42,7 +43,7 @@ typedef struct s_render_v
 {
 	void	*mlx;
 	void	*win;
-	void	*textures[5];
+	void	*textures[6];
 }	t_render_v;
 
 void	free_ptr(char *ptr);
@@ -70,6 +71,7 @@ void	copy_plain_data(t_game_data *data, t_game_data **data_copy);
 int		copy_structure(t_game_data *data, t_game_data **data_copy);
 int		check_valid_path(t_game_data *data);
 
+void	build_ground(t_render_v **var);
 void	build_player(t_render_v **var);
 void	build_collectable(t_render_v **var);
 void	build_wall(t_render_v **var);
@@ -77,6 +79,12 @@ void	build_exit(t_render_v **var);
 
 void	build_images(t_render_v **var);
 int		start_game(t_game_data **data);
+
+void	key_hook(int keycode, t_render_v **var, t_game_data **data);
+
+void	put_player(t_game_data **game, t_render_v **var, int width, int height, char direction);
+void	move_right(t_game_data **game, t_render_v **var, int i, int j);
+void	move_player(t_game_data **game, t_render_v **var, int key);
 
 void	print_map(t_game_data *data);
 void	print_difference(t_game_data *data, t_game_data *data_copy);
