@@ -69,16 +69,38 @@ void	free_map(t_game_data *data)
 		free(data->map);
 		data->map = NULL;
 	}
-	//
-	// if (data->player)
-	// {
-	// 	free(data->player);
-	// 	data->player = NULL;
-	// }
-	//
+
 	if (data)
 	{
 		free(data);
 		data = NULL;
 	}
+}
+
+void	free_map_2(t_game_data **data)
+{
+	int	i;
+
+	i = 0;
+	while (i < (*data)->height)
+	{
+		if ((*data)->map[i])
+		{
+			free((*data)->map[i]);
+		// free((data)->map[i]);
+			(*data)->map[i] = NULL;
+		}
+		i++;
+	}
+	if ((*data)->map)
+	{
+		free((*data)->map);
+		(*data)->map = NULL;
+	}
+
+	// if (data)
+	// {
+	// 	free(data);
+	// 	data = NULL;
+	// }
 }

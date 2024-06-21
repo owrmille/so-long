@@ -5,10 +5,17 @@ void free_data(t_game_data *data) {
 		// Free the map
 		if (data->map) {
 			for (int i = 0; i < data->height; i++) {
-				free(data->map[i]);
+				if (data->map[i])
+				{
+					free(data->map[i]);
+					data->map[i] = NULL;
+				}
 			}
-			free(data->map);
-			data->map = NULL;
+			if (data->map)
+			{
+				free(data->map);
+				data->map = NULL;
+			}
 		}
 
 		// Free other dynamically allocated resources
@@ -19,85 +26,87 @@ void free_data(t_game_data *data) {
 		// }
 
 		// Free the data structure itself
+
 		free(data);
+		data = NULL;
 	}
 }
 
-void	build_images(t_render_v **var)
+void	build_images(t_game_data **data)
 {
-	build_ground(var);
-	build_wall(var);
-	build_collectable(var);
-	build_exit(var);
-	build_player(var);
+	build_ground(data);
+	build_wall(data);
+	build_collectable(data);
+	build_exit(data);
+	build_player(data);
 }
 
-int	end_game(t_render_v **var, t_game_data **data)
+int	end_game(t_game_data **data)
 {
 	int	i;
 
-	mlx_destroy_image((*var)->mlx, (*var)->textures[0]);
-	// (*var)->textures[0] = NULL;
-	mlx_destroy_image((*var)->mlx, (*var)->textures[1]);
-	mlx_destroy_image((*var)->mlx, (*var)->textures[2]);
-	mlx_destroy_image((*var)->mlx, (*var)->textures[3]);
-	mlx_destroy_image((*var)->mlx, (*var)->textures[4]);
+	mlx_destroy_image((*data)->mlx, (*data)->textures[0]);
+	// (*data)->textures[0] = NULL;
+	mlx_destroy_image((*data)->mlx, (*data)->textures[1]);
+	mlx_destroy_image((*data)->mlx, (*data)->textures[2]);
+	mlx_destroy_image((*data)->mlx, (*data)->textures[3]);
+	mlx_destroy_image((*data)->mlx, (*data)->textures[4]);
 
-	mlx_destroy_window((*var)->mlx, (*var)->win);
-	mlx_destroy_display((*var)->mlx);
+	mlx_destroy_window((*data)->mlx, (*data)->win);
+	mlx_destroy_display((*data)->mlx);
 
-	if ((*var)->mlx)
+	if ((*data)->mlx)
 	{
-		free((*var)->mlx);
-		(*var)->mlx = NULL;
+		free((*data)->mlx);
+		(*data)->mlx = NULL;
 	}
+	// if ((*data)->win)
+	// {
+	// 	free((*data)->win);
+	// 	(*data)->win = NULL;
+	// }
 
-	if (*var)
-	{
-		free(*var);
-		*var = NULL;
-	}
+	// if (*data)
+	// {
+	// 	free(*data);
+	// 	*data = NULL;
+	// }
 	free_data(*data);
-	// free((*var)->mlx); // DANTOL DID THIS
+	// free_map_2(data);
 	exit(0);
 	return (0);
 }
 
-void	key_hook(int keycode, t_render_v **var, t_game_data **data)
+void	key_hook(int keycode, t_game_data **data)
 {
-	if (data == NULL || *data == NULL) {
-        ft_printf("key_hook, Error: game pointer is NULL\n");
-        return;
-    }
-	ft_printf("Pressed key: %d\\n", keycode);
+	ft_printf("Pressed key: %d\n", keycode);
 	if (keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
-		move_player(data, var, keycode);
+		move_player(data, keycode);
 	if (keycode == 53 || keycode == 27 || keycode == 9 || keycode == 65307)
-		end_game(var, data);
-	// move_player(keycode, game);
+		end_game(data);
 	// return (0);
 }
 
-void	*get_figure(t_render_v *var, char img_type)
+void	*get_figure(t_game_data **data, char img_type)
 {
 	void	*figure;
 
 	if (img_type == 'P')
-		figure = var->textures[0];
+		figure = (*data)->textures[0];
 	else if (img_type == 'C')
-		figure = var->textures[1];
+		figure = (*data)->textures[1];
 	else if (img_type == '1')
-		figure = var->textures[2];
+		figure = (*data)->textures[2];
 	else if (img_type == 'E')
-		figure = var->textures[3];
+		figure = (*data)->textures[3];
 	else if (img_type == '0')
-		figure = var->textures[4];
+		figure = (*data)->textures[4];
 	else
 		figure = NULL;
 	return (figure);
 }
 
-void	put_images(t_game_data *data, t_render_v *var)
+void	put_images(t_game_data **data) // here I should use **data or *data?
 {
 	int			i;
 	int			j;
@@ -106,13 +115,13 @@ void	put_images(t_game_data *data, t_render_v *var)
 	i = 0;
 	j = 0;
 
-	while (i < (data)->height)
+	while (i < (*data)->height)
 	{
-		while (j < (data)->width)
+		while (j < (*data)->width)
 		{
-			figure = get_figure(var, (data)->map[i][j]);
+			figure = get_figure(data, (*data)->map[i][j]);
 			if (figure)
-				mlx_put_image_to_window(var->mlx, var->win, 
+				mlx_put_image_to_window((*data)->mlx, (*data)->win, 
 					figure, j * TILE_WIDTH, i * TILE_WIDTH);
 			j++;
 		}
@@ -123,29 +132,24 @@ void	put_images(t_game_data *data, t_render_v *var)
 
 int	start_game(t_game_data **data)
 {
-	t_render_v	*var;
 	int			w_width;
 	int			w_height;
 
-	var = malloc(sizeof(t_render_v));
-	if (!var)
-		return (0);
-
-	var->mlx = mlx_init();
-	if (!var->mlx)
+	(*data)->mlx = mlx_init();
+	if (!(*data)->mlx)
 		return (0);
 
 	w_width = (*data)->width * TILE_WIDTH;
 	w_height = (*data)->height * TILE_WIDTH;
-	var->win = mlx_new_window(var->mlx, w_width, w_height, "SO LONG: nap time!");
+	(*data)->win = mlx_new_window((*data)->mlx, w_width, w_height, "SO LONG: nap time!");
 
-	if (!var->win)
-		return (free(var->mlx), 0);
+	if (!(*data)->win)
+		return (free((*data)->mlx), 0);
 
-	build_images(&var);
-	put_images(*data, var);
-	mlx_key_hook(var->win, key_hook, &var);
-	mlx_hook(var->win, 17, 0, end_game, &var);
-	mlx_loop(var->mlx);
+	build_images(data);
+	put_images(data);
+	mlx_key_hook((*data)->win, key_hook, data); // using just data increase indirectly and definitely lost, but decrease still reachable
+	mlx_hook((*data)->win, 17, 0, end_game, data); // same
+	mlx_loop((*data)->mlx);
 	return (0);
 }

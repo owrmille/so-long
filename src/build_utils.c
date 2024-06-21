@@ -1,6 +1,6 @@
 #include "../so_long.h"
 
-void	build_player(t_render_v **var)
+void	build_player(t_game_data **data)
 {
 	static void	*img;
 	char		*file;
@@ -9,13 +9,13 @@ void	build_player(t_render_v **var)
 	file = CHICKEN;
 	if (!img)
 	{
-		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
+		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
 	// (*data)->player = img;
-	(*var)->textures[0] = img;
+	(*data)->textures[0] = img;
 }
 
-void	build_collectable(t_render_v **var)
+void	build_collectable(t_game_data **data)
 {
 	static void	*img;
 	char		*file;
@@ -24,13 +24,13 @@ void	build_collectable(t_render_v **var)
 	file = CHICK;
 	if (!img)
 	{
-		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
+		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
 	// (*data)->collectable = img;
-	(*var)->textures[1] = img;
+	(*data)->textures[1] = img;
 }
 
-void	build_wall(t_render_v **var)
+void	build_wall(t_game_data **data)
 {
 	static void	*img;
 	char		*file;
@@ -39,13 +39,13 @@ void	build_wall(t_render_v **var)
 	file = ROCK;
 	if (!img)
 	{
-		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
+		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
 	// (*data)->wall = img;
-	(*var)->textures[2] = img;
+	(*data)->textures[2] = img;
 }
 
-void	build_exit(t_render_v **var)
+void	build_exit(t_game_data **data)
 {
 	static void	*img;
 	char		*file;
@@ -54,13 +54,13 @@ void	build_exit(t_render_v **var)
 	file = HOUSE;
 	if (!img)
 	{
-		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
+		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
 	// (*data)->exit = img;
-	(*var)->textures[3] = img;
+	(*data)->textures[3] = img;
 }
 
-void	build_ground(t_render_v **var)
+void	build_ground(t_game_data **data)
 {
 	static void	*img;
 	char		*file;
@@ -69,8 +69,8 @@ void	build_ground(t_render_v **var)
 	file = GRASS;
 	if (!img)
 	{
-		img = mlx_xpm_file_to_image((*var)->mlx, file, &size[0], &size[1]);
+		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
 	// (*data)->player = img;
-	(*var)->textures[4] = img;
+	(*data)->textures[4] = img;
 }
