@@ -48,59 +48,24 @@ void	free_ptr_ptr(char **ptr)
 	}
 }
 
-
-void	free_map(t_game_data *data)
+void free_data(t_game_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < (data)->height)
-	{
-		if ((data)->map[i])
-		{
-			free((data)->map[i]);
-		// free((data)->map[i]);
-			(data)->map[i] = NULL;
+	if (data) {
+		if (data->map) {
+			for (int i = 0; i < data->height; i++) {
+				if (data->map[i])
+				{
+					free(data->map[i]);
+					data->map[i] = NULL;
+				}
+			}
+			if (data->map)
+			{
+				free(data->map);
+				data->map = NULL;
+			}
 		}
-		i++;
-	}
-	if (data->map)
-	{
-		free(data->map);
-		data->map = NULL;
-	}
-
-	if (data)
-	{
 		free(data);
 		data = NULL;
 	}
-}
-
-void	free_map_2(t_game_data **data)
-{
-	int	i;
-
-	i = 0;
-	while (i < (*data)->height)
-	{
-		if ((*data)->map[i])
-		{
-			free((*data)->map[i]);
-		// free((data)->map[i]);
-			(*data)->map[i] = NULL;
-		}
-		i++;
-	}
-	if ((*data)->map)
-	{
-		free((*data)->map);
-		(*data)->map = NULL;
-	}
-
-	// if (data)
-	// {
-	// 	free(data);
-	// 	data = NULL;
-	// }
 }

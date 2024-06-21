@@ -18,7 +18,6 @@ int	is_wall_surrounded(char **map, int height, int width)
 	{
 		if (map[0][j] != '1' || map[height - 1][j] != '1')
 		{
-			// ft_printf("HM 1");
 			return (0);
 		}
 		j++;
@@ -28,7 +27,6 @@ int	is_wall_surrounded(char **map, int height, int width)
 	{
 		if (map[j][0] != '1' || map[j][width - 1] != '1')
 		{
-			// ft_printf("HM 2");
 			return (0);
 		}
 		j++;
@@ -77,7 +75,6 @@ int	check_valid_map(char **map, int height, int width)
 		return (0);
 	if (cnt[0] != 1 || cnt[1] != 1 || cnt[2] < 1)
 	{
-		// ft_printf("HM 3");
 		return (0);
 	}
 	return (1);

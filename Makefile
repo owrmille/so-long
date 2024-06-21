@@ -1,12 +1,12 @@
+NAME		=	so_long
+LIBFT 		= ./libft/libft/libft.a
+LIBFT_DIR 	= ./libft/libft
+MLX_DIR 	= ./minilibx-linux
 
-NAME	=	so_long
+CC			=	cc -Wextra -Werror -Wall
+CFLAGS		=	-Imlx -g
 
-CC		=	cc
-CFLAGS	=	 -Imlx -g 
-
-MLXFLAGS=	-L ./minilibx-linux -lmlx -lXext -lX11
-
-LIBS	=	./libft/libft/libft.a
+MLXFLAGS	=	-L $(MLX_DIR) -lmlx -lXext -lX11
 
 SRCS	=	so_long.c \
 			./src/read_map.c \
@@ -23,19 +23,19 @@ OBJS	=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
-$(NAME): $(OBJS)
-			make -C  ./minilibx-linux
-			make -C  ./libft/libft
-			$(CC) -g $(CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o $(NAME)
+$(NAME): 	$(OBJS) 
+	@make -C  $(LIBFT_DIR)
+	@make -C  $(MLX_DIR)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLXFLAGS) -o $@
 
 clean:
-			make clean -C ./minilibx-linux
-			make clean -C ./libft/libft
-			rm -rf $(OBJS)
+	@make clean -C $(MLX_DIR)
+	@make clean -C $(LIBFT_DIR)
+	rm -rf $(NAME) $(OBJS)
 			
-fclean:		clean
-			rm -rf $(NAME)
+fclean:	clean
+	rm -rf $(LIBFT)
 
-re:			fclean all
+re:		fclean all
 
 .PHONY: all clean fclean re

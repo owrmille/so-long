@@ -11,7 +11,6 @@ void	build_player(t_game_data **data)
 	{
 		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
-	// (*data)->player = img;
 	(*data)->textures[0] = img;
 }
 
@@ -26,7 +25,6 @@ void	build_collectable(t_game_data **data)
 	{
 		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
-	// (*data)->collectable = img;
 	(*data)->textures[1] = img;
 }
 
@@ -41,7 +39,6 @@ void	build_wall(t_game_data **data)
 	{
 		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
-	// (*data)->wall = img;
 	(*data)->textures[2] = img;
 }
 
@@ -56,7 +53,6 @@ void	build_exit(t_game_data **data)
 	{
 		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
-	// (*data)->exit = img;
 	(*data)->textures[3] = img;
 }
 
@@ -71,6 +67,5 @@ void	build_ground(t_game_data **data)
 	{
 		img = mlx_xpm_file_to_image((*data)->mlx, file, &size[0], &size[1]);
 	}
-	// (*data)->player = img;
 	(*data)->textures[4] = img;
 }

@@ -12,9 +12,6 @@
 # define ROCK "./textures/rock.xpm"
 # define HOUSE "./textures/house.xpm"
 
-# define WIN_MSG "You won!"
-# define LOSE_MSG "You lose :p"
-
 typedef struct s_game_data
 {
 	int		height;
@@ -35,8 +32,9 @@ typedef struct s_game_data
 
 void	free_ptr(char *ptr);
 void	free_ptr_ptr(char **ptr);
-void	free_map(t_game_data *data);
-void	free_map_2(t_game_data **data);
+void	free_data(t_game_data *data);
+// void	free_map(t_game_data *data);
+// void	free_map_2(t_game_data **data);
 int		find_symbol(char *s, char c);
 int		ft_arrlen(char **arr);
 
@@ -67,8 +65,9 @@ void	build_exit(t_game_data **data);
 
 void	build_images(t_game_data **data);
 int		start_game(t_game_data **data);
+int		end_game(t_game_data **data);
 
-void	key_hook(int keycode, t_game_data **data);
+int		key_hook(int keycode, t_game_data **data);
 
 void	put_player(t_game_data **data, int row, int col);
 void	make_movement(t_game_data **data, int col, int row, char direction);

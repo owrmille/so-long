@@ -1,37 +1,5 @@
 #include "../so_long.h"
 
-void free_data(t_game_data *data) {
-	if (data) {
-		// Free the map
-		if (data->map) {
-			for (int i = 0; i < data->height; i++) {
-				if (data->map[i])
-				{
-					free(data->map[i]);
-					data->map[i] = NULL;
-				}
-			}
-			if (data->map)
-			{
-				free(data->map);
-				data->map = NULL;
-			}
-		}
-
-		// Free other dynamically allocated resources
-		// Example:
-		// if (data->background) {
-		//     mlx_destroy_image(data->mlx, data->background);
-		//     data->background = NULL;
-		// }
-
-		// Free the data structure itself
-
-		free(data);
-		data = NULL;
-	}
-}
-
 void	build_images(t_game_data **data)
 {
 	build_ground(data);
@@ -43,10 +11,7 @@ void	build_images(t_game_data **data)
 
 int	end_game(t_game_data **data)
 {
-	int	i;
-
 	mlx_destroy_image((*data)->mlx, (*data)->textures[0]);
-	// (*data)->textures[0] = NULL;
 	mlx_destroy_image((*data)->mlx, (*data)->textures[1]);
 	mlx_destroy_image((*data)->mlx, (*data)->textures[2]);
 	mlx_destroy_image((*data)->mlx, (*data)->textures[3]);
@@ -60,31 +25,19 @@ int	end_game(t_game_data **data)
 		free((*data)->mlx);
 		(*data)->mlx = NULL;
 	}
-	// if ((*data)->win)
-	// {
-	// 	free((*data)->win);
-	// 	(*data)->win = NULL;
-	// }
-
-	// if (*data)
-	// {
-	// 	free(*data);
-	// 	*data = NULL;
-	// }
 	free_data(*data);
-	// free_map_2(data);
 	exit(0);
 	return (0);
 }
 
-void	key_hook(int keycode, t_game_data **data)
+int	key_hook(int keycode, t_game_data **data)
 {
-	ft_printf("Pressed key: %d\n", keycode);
+	// ft_printf("Pressed key: %d\n", keycode);
 	if (keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
 		move_player(data, keycode);
 	if (keycode == 53 || keycode == 27 || keycode == 9 || keycode == 65307)
 		end_game(data);
-	// return (0);
+	return (0);
 }
 
 void	*get_figure(t_game_data **data, char img_type)
