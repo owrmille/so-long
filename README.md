@@ -30,6 +30,7 @@ You can use the `W`, `A`, `S`, and `D` keys to move the chicken. You can close t
 
 You can create a map by yourself, following these rules:
 
+- The map should have a `.ber` extension.
 - The map has to be constructed with 3 components: rocks, chicks, and empty space.
 - The map can be composed of only these 5 characters:
   - `0` for an empty space
