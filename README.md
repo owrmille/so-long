@@ -1,7 +1,10 @@
 # so_long
-**Nap Time**
+**nap time!**
 
-"Nap Time" is a 2D game written in C where you help a chicken gather all her chicks from the field and bring them home for a nap. Navigate obstacles using `W`, `A`, `S`, and `D` keys, collect all the chicks, and find the shortest path to the house. Can you ensure every chick gets home safely?
+"nap time!" is a 2D game written in C language where you help a chicken gather all her chicks from the field and bring them home for a nap. Navigate obstacles using `W`, `A`, `S`, and `D` keys, collect all the chicks, and find the shortest path to the house. Can you ensure every chick gets home safely?
+
+![Game Screenshot](nap_time_screenshot.png)
+
 
 1. To clone this repository
    ```bash
