@@ -9,30 +9,8 @@ void	build_images(t_game_data **data)
 	build_player(data);
 }
 
-int	end_game(t_game_data **data)
-{
-	mlx_destroy_image((*data)->mlx, (*data)->textures[0]);
-	mlx_destroy_image((*data)->mlx, (*data)->textures[1]);
-	mlx_destroy_image((*data)->mlx, (*data)->textures[2]);
-	mlx_destroy_image((*data)->mlx, (*data)->textures[3]);
-	mlx_destroy_image((*data)->mlx, (*data)->textures[4]);
-
-	mlx_destroy_window((*data)->mlx, (*data)->win);
-	mlx_destroy_display((*data)->mlx);
-
-	if ((*data)->mlx)
-	{
-		free((*data)->mlx);
-		(*data)->mlx = NULL;
-	}
-	free_data(*data);
-	exit(0);
-	return (0);
-}
-
 int	key_hook(int keycode, t_game_data **data)
 {
-	// ft_printf("Pressed key: %d\n", keycode);
 	if (keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
 		move_player(data, keycode);
 	if (keycode == 53 || keycode == 27 || keycode == 9 || keycode == 65307)
@@ -59,15 +37,14 @@ void	*get_figure(t_game_data **data, char img_type)
 	return (figure);
 }
 
-void	put_images(t_game_data **data) // here I should use **data or *data?
+void	put_images(t_game_data **data)
 {
 	int			i;
 	int			j;
-	void	*figure;
+	void		*figure;
 
 	i = 0;
 	j = 0;
-
 	while (i < (*data)->height)
 	{
 		while (j < (*data)->width)
@@ -91,18 +68,19 @@ int	start_game(t_game_data **data)
 	(*data)->mlx = mlx_init();
 	if (!(*data)->mlx)
 		return (0);
-
 	w_width = (*data)->width * TILE_WIDTH;
 	w_height = (*data)->height * TILE_WIDTH;
-	(*data)->win = mlx_new_window((*data)->mlx, w_width, w_height, "SO LONG: nap time!");
-
+	(*data)->win = mlx_new_window((*data)->mlx, w_width, w_height,
+			"SO LONG: nap time!");
 	if (!(*data)->win)
-		return (free((*data)->mlx), 0);
-
+	{
+		free((*data)->mlx);
+		return (0);
+	}
 	build_images(data);
 	put_images(data);
-	mlx_key_hook((*data)->win, key_hook, data); // using just data increase indirectly and definitely lost, but decrease still reachable
-	mlx_hook((*data)->win, 17, 0, end_game, data); // same
+	mlx_key_hook((*data)->win, key_hook, data);
+	mlx_hook((*data)->win, 17, 0, end_game, data);
 	mlx_loop((*data)->mlx);
 	return (0);
 }

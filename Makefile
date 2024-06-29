@@ -9,15 +9,16 @@ CFLAGS      = -Imlx -g
 MLXFLAGS    = -L $(MLX_DIR) -lmlx -lXext -lX11
 
 SRCS        = so_long.c \
-              ./src/read_map.c \
-              ./src/check_valid_map.c \
-              ./src/check_valid_path.c \
-              ./src/start_game.c \
-              ./src/move_player.c \
-              ./src/build_utils.c \
-              ./src/utils.c \
-              ./src/utils_2.c \
-              temp.c
+				./src/read_map.c \
+				./src/check_valid_map.c \
+				./src/check_valid_path.c \
+				./src/start_game.c \
+				./src/move_player.c \
+				./src/build_utils.c \
+				./src/utils.c \
+				./src/utils_2.c \
+				./src/error_messages.c \
+				./src/end_game.c \
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -27,22 +28,22 @@ $(NAME): $(OBJS)
 	@echo "Building $(NAME)..."
 	@echo "Checking libft submodule..."
 	@if [ ! -d "$(LIBFT_DIR)" ]; then \
-        echo "Initializing libft submodule..."; \
-        git submodule update --init --recursive libft; \
-    else \
-        echo "Updating libft submodule..."; \
-        git submodule update --recursive libft; \
-    fi
+		echo "Initializing libft submodule..."; \
+		git submodule update --init --recursive libft; \
+	else \
+		echo "Updating libft submodule..."; \
+		git submodule update --recursive libft; \
+	fi
 	@make -C $(LIBFT_DIR)
 
 	@echo "Checking minilibx submodule..."
 	@if [ ! -d "$(MLX_DIR)" ]; then \
-        echo "Initializing minilibx submodule..."; \
-        git submodule update --init --recursive minilibx-linux; \
-    else \
-        echo "Updating minilibx submodule..."; \
-        git submodule update --recursive minilibx-linux; \
-    fi
+		echo "Initializing minilibx submodule..."; \
+		git submodule update --init --recursive minilibx-linux; \
+	else \
+		echo "Updating minilibx submodule..."; \
+		git submodule update --recursive minilibx-linux; \
+	fi
 	@make -C $(MLX_DIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLXFLAGS) -o $@
 

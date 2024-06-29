@@ -15,29 +15,26 @@ int	find_directions(t_game_data *data_copy, int cur_x, int cur_y)
 
 int	find_path(t_game_data *data_copy, int cur_x, int cur_y)
 {
+	int	x;
+	int	y;
+
 	data_copy->player_pos_x = cur_x;
 	data_copy->player_pos_y = cur_y;
 	if (data_copy->current_score == data_copy->required_score 
 		&& data_copy->exit_count == 1)
-	{
 		return (1);
-	}
-	if ((data_copy)->player_pos_y < 0 || (data_copy)->player_pos_y >= (data_copy)->height 
-		|| (data_copy)->player_pos_x < 0 || (data_copy)->player_pos_x >= (data_copy)->width
-		|| (data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] == '1')
-	{
+	x = data_copy->player_pos_x;
+	y = data_copy->player_pos_y;
+	if (y < 0 || y >= (data_copy)->height || x < 0 || x >= (data_copy)->width
+		|| (data_copy)->map[y][x] == '1')
 		return (0);
-	}
-
-	if ((data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] == 'C')
+	if ((data_copy)->map[y][x] == 'C')
 		(data_copy)->current_score++;
-	if ((data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] == 'E')
+	if ((data_copy)->map[y][x] == 'E')
 		(data_copy)->exit_count++;
-	(data_copy)->map[(data_copy)->player_pos_y][(data_copy)->player_pos_x] = '1';
-	if (find_directions(data_copy, (data_copy)->player_pos_x, (data_copy)->player_pos_y))
-	{
+	(data_copy)->map[y][x] = '1';
+	if (find_directions(data_copy, x, y))
 		return (1);
-	}
 	return (0);
 }
 
@@ -85,10 +82,6 @@ int	check_valid_path(t_game_data *data)
 		return (0);
 	if (find_path(data_copy, data_copy->player_pos_x, data_copy->player_pos_y))
 	{
-		// just for me:
-		// print_map(data_copy);
-		// print_difference(data, data_copy);
-		// just for me.
 		free_data(data_copy);
 		return (1);
 	}

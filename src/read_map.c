@@ -8,9 +8,8 @@ void	calculate_size(int fd, char **line, t_game_data **data)
 	*line = get_next_line(fd);
 	if (*line)
 	{
-		(*data)->width = ft_strlen(*line) - 1;
+		(*data)->width = ft_strlen(*line) - 1; 
 	}
-	/* -1 because of '\n' in every line */
 	while (*line)
 	{
 		free_ptr_ptr(line);
@@ -75,13 +74,11 @@ int	read_map(int argc, char **argv, t_game_data **data)
 		|| !ft_strrchr(argv[1], '.') 
 		|| ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 4))
 	{
-		// ft_printf("Filename error\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
-		// ft_printf("Opening file error\n");
 		return (0);
 	}
 	calculate_size(fd, &line, data);

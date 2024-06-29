@@ -16,10 +16,3 @@ int	map_line_len(char **map, int height)
 	}
 	return (prev_len);
 }
-
-int	map_error(t_game_data **data)
-{
-	ft_printf("Error\n");
-	free_data(*data);
-	return (0);
-}

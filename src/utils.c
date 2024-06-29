@@ -48,16 +48,23 @@ void	free_ptr_ptr(char **ptr)
 	}
 }
 
-void free_data(t_game_data *data)
+void	free_data(t_game_data *data)
 {
-	if (data) {
-		if (data->map) {
-			for (int i = 0; i < data->height; i++) {
+	int	i;
+
+	i = 0;
+	if (data)
+	{
+		if (data->map)
+		{
+			while (i < data->height)
+			{
 				if (data->map[i])
 				{
 					free(data->map[i]);
 					data->map[i] = NULL;
 				}
+				i++;
 			}
 			if (data->map)
 			{
